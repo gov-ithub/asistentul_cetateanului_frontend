@@ -1,3 +1,5 @@
+![Travis build](https://travis-ci.org/ClaudiuCeia/asistentul_cetateanului_frontend.svg?branch=master)
+
 # Asistentul Cetățeanului - Frontend
 
 > Pentru contribuitori: Detalii despre cum se poate contribui coming soon
