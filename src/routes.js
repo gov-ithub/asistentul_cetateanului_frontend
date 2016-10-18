@@ -3,6 +3,11 @@ import { Router, Route } from 'react-router';
 
 import App from './components/App';
 import Register from './components/Register';
+import Login from './components/Login';
+import Settings from './components/Settings';
+import PersonalDataSettings from './components/PersonalDataSettings';
+import NotificationSettings from './components/NotificationSettings';
+import Feed from './components/Feed';
 import NotFound from './components/NotFound';
 
 const Routes = (props) => (
@@ -13,7 +18,7 @@ const Routes = (props) => (
     <Route path="/setari" component={Settings} />
     <Route path="/setari/date-personale" component={PersonalDataSettings} />
     <Route path="/setari/notificari" component={NotificationSettings} />
-    <Route path="/flux" component={Feed}
+    <Route path="/flux" component={Feed} />
     <Route path="*" component={NotFound} />
   </Router>
 );
