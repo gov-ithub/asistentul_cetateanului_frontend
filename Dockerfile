@@ -1,4 +1,5 @@
 FROM node:6
+MAINTAINER claudiu.ceia@ithub.gov.ro
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
