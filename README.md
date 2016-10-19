@@ -21,12 +21,22 @@ $> docker ps // vezi running containers, copiaza hash pentru Asistentul Cetatean
 $> docker stop _HASH_
 ```
 
+## Tehnologii folosite
+- [React](https://facebook.github.io/react/)
+- [Jest](https://facebook.github.io/jest/)
+- [Docker](https://docs.docker.com/engine/installation/)
+- [npm](https://github.com/npm/npm)
+- *[Travis](https://travis-ci.org/) 
+- [React Router](https://github.com/ReactTraining/react-router)
+
+```* Posibil să se schimbe în viitorul apropiat```
+ 
 ## Contribuie
 
 Dacă vrei să contribui - ești binevenit(ă) - but we don't have cookies (yet) 
 
 ### Proces
-
+- Vezi lista de tehnologii folosite - îți sunt familiare?
 - Dacă nu ești încă înscris(ă) în comunitate, te rog fă-o pe [site-ul GovITHub](http://ithub.gov.ro/formular-de-aplicatie/)
 - Aruncă o privire la [guidelines](https://github.com/gov-ithub/guidelines/blob/master/CODE_REVIEW.md) pentru code review 
 - Caută în issues un task interesant pentru tine (sau, dacă ai o propunere, deschide un issue / trimite un pull request)
