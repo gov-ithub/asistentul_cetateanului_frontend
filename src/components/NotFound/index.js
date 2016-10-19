@@ -1,17 +1,7 @@
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-
-import './style.css';
+import React, { Component } from 'react';
 
 export default class NotFound extends Component {
   render() {
-    const { className, ...props } = this.props;
-    return (
-      <div className={classnames('NotFound', className)} {...props}>
-        <h1> 
-          404
-        </h1>
-      </div>
-    );
+    return <h1>404</h1>;
   }
 }
