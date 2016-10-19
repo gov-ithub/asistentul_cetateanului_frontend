@@ -21,6 +21,12 @@ $> docker ps // vezi running containers, copiaza hash pentru Asistentul Cetatean
 $> docker stop _HASH_
 ```
 
+Pentru a rula comenzi în container:
+```
+// $> docker exec asistentul_cetateanului [CMD]
+$> docker exec asistentul_cetateanului npm test
+```
+
 ## Tehnologii folosite
 - [React](https://facebook.github.io/react/)
 - [Jest](https://facebook.github.io/jest/)
