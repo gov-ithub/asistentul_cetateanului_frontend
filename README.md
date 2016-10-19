@@ -46,7 +46,7 @@ Dacă vrei să contribui - ești binevenit(ă) - but we don't have cookies (yet)
 ### Pro tips
 
 #### Testing
-Rulează `npm test`. `npm test` rulează doar testele nou introduse, însă vă permite rularea tuturor testelor (you`ll know what to do when you see it). 
+Rulează `npm test`. `npm test` rulează doar testele nou introduse, de la ultimul commit, by default, însă vă permite rularea tuturor testelor (you`ll know what to do when you see it). 
 
 Ca și framework folosim [Jest](https://facebook.github.io/jest/). [Documentație mai completă >>](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
 
