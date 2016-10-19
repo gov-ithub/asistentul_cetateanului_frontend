@@ -28,6 +28,7 @@ $> docker stop _HASH_
 - [npm](https://github.com/npm/npm)
 - *[Travis](https://travis-ci.org/) 
 - [React Router](https://github.com/ReactTraining/react-router)
+- [Flow](https://flowtype.org/)
 
 ```* Posibil să se schimbe în viitorul apropiat```
  
@@ -48,6 +49,11 @@ Dacă vrei să contribui - ești binevenit(ă) - but we don't have cookies (yet)
 Rulează `npm test`. `npm test` rulează doar testele nou introduse, însă vă permite rularea tuturor testelor (you`ll know what to do when you see it). 
 
 Ca și framework folosim [Jest](https://facebook.github.io/jest/). [Documentație mai completă >>](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
+
+### Development
+- npm start: Servește aplicația pe portul 3000
+- npm run build: Pregătește aplicația pentru deployment (include minification, bundling, etc)
+- npm run eject: Elimină dependența de [create-react-app](https://github.com/facebookincubator/create-react-app/). Poate va fi necesar, dar până atunci please don't touch. 
 
 #### Pull Request cheat-sheet
 - Ai un summary complet? Trebuie să fie clar: ce schimbare aduce diff-ul, cum ai testat, și în cazuri unde se fac schimbări majore, dacă e cazul, avem un revert plan?
