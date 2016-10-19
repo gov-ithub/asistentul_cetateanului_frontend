@@ -50,7 +50,7 @@ Rulează `npm test`. `npm test` rulează doar testele nou introduse, însă vă 
 
 Ca și framework folosim [Jest](https://facebook.github.io/jest/). [Documentație mai completă >>](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests)
 
-### Development
+#### Development
 - npm start: Servește aplicația pe portul 3000
 - npm run build: Pregătește aplicația pentru deployment (include minification, bundling, etc)
 - npm run eject: Elimină dependența de [create-react-app](https://github.com/facebookincubator/create-react-app/). Poate va fi necesar, dar până atunci please don't touch. 
