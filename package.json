@@ -9,8 +9,11 @@
     "react-scripts": "0.6.1"
   },
   "dependencies": {
+    "auth0-lock": "^10.4.0",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "dotenv": "^2.0.0",
+    "jwt-decode": "^2.1.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",

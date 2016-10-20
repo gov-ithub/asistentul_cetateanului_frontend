@@ -1,7 +1,7 @@
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRedirect } from 'react-router';
 
-import App from './components/App';
+import Template from './Template';
 import Register from './components/Register';
 import Login from './components/Login';
 import Settings from './components/Settings';
@@ -10,16 +10,56 @@ import NotificationSettings from './components/NotificationSettings';
 import Feed from './components/Feed';
 import NotFound from './components/NotFound';
 
+import AuthService from './utils/AuthService';
+
+const auth = new AuthService(
+  process.env.REACT_APP_AUTH0_CLIENT_ID, 
+  process.env.REACT_APP_AUTH0_DOMAIN
+);
+
+const requireAuth = (nextState, replace) => {
+  if (!auth.loggedIn()) {
+    replace({pathname: '/login'});
+  }
+}
+
+const parseAuthHash = (nextState, replace) => {
+  auth.parseHash(nextState.location.hash);
+  replace({ pathname: '/' });
+}
+
+// Need to pass auth to Template too
+var AuthTemplate = React.createClass({
+  render() {
+    return (
+      <Template auth={auth}> 
+        {this.props.children}
+      </Template>
+    );
+  }
+});
+
 const Routes = (props) => (
   <Router {...props}>
-    <Route path="/" component={App} />
-    <Route path="/inregistreaza-te" component={Register} />
-    <Route path="/login" component={Login} />
-    <Route path="/setari" component={Settings} />
-    <Route path="/setari/date-personale" component={PersonalDataSettings} />
-    <Route path="/setari/notificari" component={NotificationSettings} />
-    <Route path="/flux" component={Feed} />
-    <Route path="*" component={NotFound} />
+    <Route path="/" component={AuthTemplate} auth={auth}>
+      <IndexRedirect to="/flux" />
+      <Route path="/inregistreaza-te" component={Register} />
+      <Route path="/login" component={Login} />
+      <Route path="/setari" component={Settings} onEnter={requireAuth} />
+      <Route 
+        path="/setari/date-personale" 
+        component={PersonalDataSettings} 
+        onEnter={requireAuth} 
+      />
+      <Route 
+        path="/setari/notificari" 
+        component={NotificationSettings} 
+        onEnter={requireAuth}
+      />
+      <Route path="/flux" component={Feed} onEnter={requireAuth}/>
+      <Route path="access_token:token" onEnter={parseAuthHash} />
+      <Route path="*" component={NotFound} />
+    </Route>
   </Router>
 );
 

@@ -7,9 +7,18 @@ Asistent utilitar care livrează alerte și notificări pentru cetățeni, în f
 
 ## Instalare
 
+Crează un cont pe Auth0 și de un client tip Single Page Application, vei avea nevoie de `Client ID` și `Domain` mai târziu (le găsești în setările clientului pe Auth0).
+
 ```
 $> git clone https://github.com/gov-ithub/asistentul_cetateanului_frontend.git
 $> cd asistentul_cetateanului_frontend
+$> cp .env_template .env
+$> vim .env // înlocuiește credențialele false cu ale tale
+```
+
+### Dacă vrei să folosești Docker:
+
+```
 $> docker build -t asistentul_cetateanului .
 $> docker run -d -p 80:3000 --name asistentul_cetateanului_inst asistentul_cetateanului
 $> // Aplicatia va rula pe localhost, portul nu trebuie specificat (80)
@@ -27,16 +36,27 @@ Pentru a rula comenzi în container:
 $> docker exec asistentul_cetateanului npm test
 ```
 
+#### Dacă nu vrei să folosești Docker
+
+```  
+$> npm install
+$> npm start
+```
+
 ## Tehnologii folosite
 - [React](https://facebook.github.io/react/)
 - [Jest](https://facebook.github.io/jest/)
 - [Docker](https://docs.docker.com/engine/installation/)
 - [npm](https://github.com/npm/npm)
-- *[Travis](https://travis-ci.org/) 
+- [1][Travis](https://travis-ci.org/) 
 - [React Router](https://github.com/ReactTraining/react-router)
 - [Flow](https://flowtype.org/)
+- [2][Auth0](https://auth0.com)
 
-```* Posibil să se schimbe în viitorul apropiat```
+```
+[1] Posibil să se schimbe în viitorul apropiat
+[2] Auth0 e doar o soluție temporară. Aveți nevoie de cont pe Auth0 și un Single Page client pentru a testa/dezvolta local.
+```
  
 ## Contribuie
 
