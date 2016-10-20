@@ -4,6 +4,4 @@
 
 #### Test plan:
 
-#### Suggested reviewers: @claudiuceia, @...
-
-@gov-ithub/asistentul_cetateanului_frontend
+#### Suggested reviewers: @gov-ithub/asistentul_cetateanului_frontend, ...
