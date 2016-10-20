@@ -71,9 +71,13 @@ Dacă răspunsul e "da" pentru toate 3, procesul de code review ar trebui să fi
 #### Pull Requests > Issues
 Preferă pull request-uri peste issues unde e posibil, pull request-urile sunt primite cu brațele deschise oricând.  
 
+## Known issues
+`npm test` poate da fail având în vedere numărul de fișiere watch-uite, se poate rezolva pe Linux cu:
+
+`echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+
 ## Cum poti intra in contact cu echipa?
 - Email: claudiu.ceia@ithub.gov.ro
 - [Slack](https://govithub.slack.com/messages/asist_cetatean/details/) 
-
 
 Mai multe detalii în curând! 
