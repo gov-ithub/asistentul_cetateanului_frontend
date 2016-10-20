@@ -46,7 +46,7 @@ Dacă vrei să contribui - ești binevenit(ă) - but we don't have cookies (yet)
 - Vezi lista de tehnologii folosite - îți sunt familiare?
 - Dacă nu ești încă înscris(ă) în comunitate, te rog fă-o pe [site-ul GovITHub](http://ithub.gov.ro/formular-de-aplicatie/)
 - Aruncă o privire la [guidelines](https://github.com/gov-ithub/guidelines/blob/master/CODE_REVIEW.md) pentru code review 
-- Caută în issues un task interesant pentru tine (sau, dacă ai o propunere, deschide un issue / trimite un pull request)
+- Caută în issues un task interesant pentru tine (sau, dacă ai o propunere, deschide un issue / trimite un pull request). Task-urile care nu sunt up-for-grabs sunt [marcate ca atare](https://github.com/gov-ithub/asistentul_cetateanului_frontend/issues?q=is%3Aopen+is%3Aissue+label%3Aup-for-grabs).
 - După ce trecem prin code review - celebrate! :star: :star2: :star:
 
 ### Pro tips
