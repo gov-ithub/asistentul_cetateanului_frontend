@@ -1,6 +1,6 @@
 # Asistentul Cetățeanului [![Travis build](https://travis-ci.org/gov-ithub/asistentul_cetateanului_frontend.svg?branch=master)](https://travis-ci.org/gov-ithub/asistentul_cetateanului_frontend)
 
-Asistent utilitar care livrează alerte și notificări pentru cetățeni, în funcție de preferințe. La bază este un notification engine, cu un API care oferă posibilitatea de livrare de alerte din partea diverselor agenții / instituții ale statului. Aceste notificări se împart în cele cu caracter general (care sunt de interes pentru mai mulți cetățeni, cum ar fi alertele meteo) sau cu caracter personal (care sunt de interes pentru un singur cetățean, cum ar fi cele legate de expirarea documentelor).
+Asistent utilitar care livrează alerte și notificări pentru cetățeni, în funcție de preferințe. La bază este un notification engine, cu un API care oferă posibilitatea de livrare de alerte din partea diverselor agenții / instituții ale statului. Aceste notificări se împart în cele cu caracter general (care sunt de interes pentru mai mulți cetățeni, cum ar fi alertele meteo) sau cu caracter personal (care sunt de interes pentru un singur cetățean, cum ar fi cele legate de expirarea documentelor). Mai multe detalii pe [wiki](https://github.com/gov-ithub/asistentul_cetateanului_frontend/wiki).
 
 ## Requirements 
 - [Docker](https://docs.docker.com/engine/installation/)
