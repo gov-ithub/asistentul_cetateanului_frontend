@@ -2,8 +2,6 @@ import React, { PropTypes as T, Component } from 'react';
 import { Navbar, Nav, NavItem, Grid, Row, Col } from 'react-bootstrap';
 import AuthService from './utils/AuthService';
 
-import ProfileDetails from './components/ProfileDetails';
-
 import './template.css';
 
 class Template extends Component {
@@ -19,20 +17,27 @@ class Template extends Component {
     super(props, context);
 
     this.state = {
-      profile: this.props.auth.getProfile()
+      profile: this.props.auth.getProfile(),
+      isLoggedIn: this.props.auth.isLoggedIn()
     };
 
     this.props.auth.on('profile_updated', (newProfile) => {
-      this.setState({profile: newProfile})
+      this.setState({
+        profile: newProfile
+      })
     });
   }
 
   logout() {
     this.props.auth.logout();
+    this.setState({
+      isLoggedIn: false
+    });
     this.context.router.push('/login');
   }
 
   render() {
+    console.log(this.state);
     let children = null;
     if (this.props.children) {
       children = React.cloneElement(this.props.children, {
@@ -40,12 +45,17 @@ class Template extends Component {
       })
     }
     
-    const { profile } = this.state;
+    const { profile, isLoggedIn } = this.state;
+
     let profile_details = null;
-    if (profile) {
-      if ( Object.getOwnPropertyNames(profile).length !== 0) {
-        profile_details = <ProfileDetails profile={profile} />;
-      }
+    let register_button = 
+      <NavItem eventKey={1} href="/inregistreaza-te">Înregistrează-te</NavItem>;
+    let login_button = 
+      <NavItem eventKey={2} href="/login">Login</NavItem>;
+    if (isLoggedIn) {
+      profile_details = <Navbar.Text>Bun venit, {profile.nickname}!</Navbar.Text>;
+      register_button = null;
+      login_button = null;
     }
 
     return (
@@ -59,9 +69,10 @@ class Template extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem eventKey={1} href="/inregistreaza-te">Înregistrează-te</NavItem>
-              <NavItem eventKey={2} href="/login">Login</NavItem>
+              {register_button}
+              {login_button}
             </Nav>
+            {profile_details}
             <Nav pullRight> 
               <NavItem eventKey={1} href="/flux">Flux</NavItem>
               <NavItem eventKey={2} onClick={this.logout.bind(this)}>Logout</NavItem>
@@ -71,7 +82,7 @@ class Template extends Component {
         <Grid>
           <Row>
             <Col xs={4} md={2} className="sidebar">
-              {profile_details}
+              Sidebar
             </Col>
             <Col xs={10} md={5}>{children}</Col>
           </Row>
