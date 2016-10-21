@@ -101,3 +101,7 @@ Preferă pull request-uri peste issues unde e posibil, pull request-urile sunt p
 - [Slack](https://govithub.slack.com/messages/asist_cetatean/details/) 
 
 Mai multe detalii în curând! 
+
+----------
+
+**Made with :heart: by [GovITHub](http://ithub.gov.ro)**
