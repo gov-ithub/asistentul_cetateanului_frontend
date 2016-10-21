@@ -5,6 +5,10 @@ import AuthService from '../../utils/AuthService';
 
 
 export default class Login extends Component {
+  static contextTypes = {
+    router: T.object
+  }
+
   static propTypes = {
     auth: T.instanceOf(AuthService)
   }
@@ -20,7 +24,7 @@ export default class Login extends Component {
     }, function(err) {
       if (err) {
         alert("Something went wrong: " + err.message);
-      }
+      } 
     });
   }
 

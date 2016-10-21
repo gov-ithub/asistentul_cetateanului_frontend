@@ -18,8 +18,14 @@ const auth = new AuthService(
 );
 
 const requireAuth = (nextState, replace) => {
-  if (!auth.loggedIn()) {
+  if (!auth.isLoggedIn()) {
     replace({pathname: '/login'});
+  }
+}
+
+const hideFromAuth = (nextState, replace) => {
+  if (auth.isLoggedIn()) {
+    replace({pathname: '/'});
   }
 }
 
@@ -43,8 +49,9 @@ const Routes = (props) => (
   <Router {...props}>
     <Route path="/" component={AuthTemplate} auth={auth}>
       <IndexRedirect to="/flux" />
-      <Route path="/inregistreaza-te" component={Register} />
-      <Route path="/login" component={Login} />
+      <Route path="access_token:token" onEnter={parseAuthHash} />
+      <Route path="/inregistreaza-te" component={Register} onEnter={hideFromAuth} />
+      <Route path="/login" component={Login} onEnter={hideFromAuth} />
       <Route path="/setari" component={Settings} onEnter={requireAuth} />
       <Route 
         path="/setari/date-personale" 
@@ -57,7 +64,6 @@ const Routes = (props) => (
         onEnter={requireAuth}
       />
       <Route path="/flux" component={Feed} onEnter={requireAuth}/>
-      <Route path="access_token:token" onEnter={parseAuthHash} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
