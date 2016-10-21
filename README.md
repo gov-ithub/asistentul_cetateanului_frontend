@@ -7,7 +7,7 @@ Asistent utilitar care livrează alerte și notificări pentru cetățeni, în f
 
 ## Instalare
 
-Crează un cont pe Auth0 și de un client tip Single Page Application, vei avea nevoie de `Client ID` și `Domain` mai târziu (le găsești în setările clientului pe Auth0).
+Crează un cont pe [Auth0](https://auth0.com) și de un client tip Single Page Application, vei avea nevoie de `Client ID` și `Domain` mai târziu (le găsești în setările clientului pe [Auth0](https://auth0.com)).
 
 ```
 $> git clone https://github.com/gov-ithub/asistentul_cetateanului_frontend.git
@@ -16,7 +16,7 @@ $> cp .env_template .env
 $> vim .env // înlocuiește credențialele false cu ale tale
 ```
 
-### Dacă vrei să folosești Docker:
+#### Dacă vrei să folosești Docker:
 
 ```
 $> docker build -t asistentul_cetateanului .
