@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "auth0-lock": "^10.4.0",
+    "belle": "^2.0.9",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "dotenv": "^2.0.0",
