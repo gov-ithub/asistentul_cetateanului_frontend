@@ -1,27 +1,23 @@
-import Auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock';
 import { isTokenExpired } from './jwtHelper';
 import { EventEmitter } from 'events';
+import { browserHistory } from 'react-router';
 
 export default class AuthService extends EventEmitter {
   constructor(clientId, domain) {
     super();
 
-    this.auth0 = new Auth0({
-      clientID: clientId,
-      domain: domain,
-      responseType: 'token'
-    });
+    this.lock = new Auth0Lock(clientId, domain, {})
 
-    this.lock = new Auth0Lock(clientId, domain, {});
-    this.lock.on('authenticated', this._doAuthentication.bind(this));
+    this.lock.on('authenticated', this._doAuthentication.bind(this))
+    this.lock.on('authorization_error', this._authorizationError.bind(this));
 
-    this.login = this.login.bind(this);
-    this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this)
   }
 
-  _doAuthentication(authResult) {
+  _doAuthentication(authResult){
     this.setToken(authResult.idToken);
+    browserHistory.replace('/flux');
 
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
@@ -30,6 +26,14 @@ export default class AuthService extends EventEmitter {
         this.setProfile(profile);
       }
     });
+  }
+
+  _authorizationError(error) {
+    console.log('Authentication error', error);
+  }
+
+  login() {
+    this.lock.show()
   }
 
   setProfile(profile) {
@@ -42,35 +46,20 @@ export default class AuthService extends EventEmitter {
     return profile ? JSON.parse(localStorage.profile) : {};
   }
 
-  login(params, onError) {
-    this.auth0.login(params, onError);
-  }
-
-  signup(params, onError) {
-    this.auth0.signup(params, onError);
-  }
-
-  parseHash(hash) {
-    const authResult = this.auth0.parseHash(hash);
-    if (authResult && authResult.idToken) {
-      this.setToken(authResult.idToken);
-    }
-  }
-
-  isLoggedIn() {
+  isLoggedIn(){
     const token = this.getToken();
     return !!token && !isTokenExpired(token);
   }
 
-  setToken(idToken) {
-    localStorage.setItem('id_token', idToken);
+  setToken(idToken){
+    localStorage.setItem('id_token', idToken)
   }
 
-  getToken() {
-    return localStorage.getItem('id_token');
+  getToken(){
+    return localStorage.getItem('id_token')
   }
 
-  logout() {
+  logout(){
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
   }
