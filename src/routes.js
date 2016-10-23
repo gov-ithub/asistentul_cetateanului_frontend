@@ -1,14 +1,13 @@
 import React from 'react';
 import { Router, Route, IndexRedirect } from 'react-router';
 
-import Template from './Template';
-import Register from './components/Register';
-import Login from './components/Login';
-import Settings from './components/Settings';
-import PersonalDataSettings from './components/PersonalDataSettings';
-import NotificationSettings from './components/NotificationSettings';
-import Feed from './components/Feed';
-import NotFound from './components/NotFound';
+import Container from './Container';
+import Settings from './components/Settings/Settings';
+import PersonalDataSettings from './components/PersonalDataSettings/PersonalDataSettings';
+import NotificationSettings from './components/NotificationSettings/NotificationSettings';
+import Feed from './components/Feed/Feed';
+import Home from './components/Home/Home';
+import NotFound from './components/NotFound/NotFound';
 
 import AuthService from './utils/AuthService';
 
@@ -19,39 +18,15 @@ const auth = new AuthService(
 
 const requireAuth = (nextState, replace) => {
   if (!auth.isLoggedIn()) {
-    replace({pathname: '/login'});
+    replace({pathname: '/home'});
   }
 }
-
-const hideFromAuth = (nextState, replace) => {
-  if (auth.isLoggedIn()) {
-    replace({pathname: '/'});
-  }
-}
-
-const parseAuthHash = (nextState, replace) => {
-  auth.parseHash(nextState.location.hash);
-  replace({ pathname: '/' });
-}
-
-// Need to pass auth to Template too
-var AuthTemplate = React.createClass({
-  render() {
-    return (
-      <Template auth={auth}> 
-        {this.props.children}
-      </Template>
-    );
-  }
-});
 
 const Routes = (props) => (
   <Router {...props}>
-    <Route path="/" component={AuthTemplate} auth={auth}>
-      <IndexRedirect to="/flux" />
-      <Route path="access_token:token" onEnter={parseAuthHash} />
-      <Route path="/inregistreaza-te" component={Register} onEnter={hideFromAuth} />
-      <Route path="/login" component={Login} onEnter={hideFromAuth} />
+    <Route path="/" component={Container} auth={auth}>
+      <IndexRedirect to="/home" />
+      <Route path="/home" component={Home} />
       <Route path="/setari" component={Settings} onEnter={requireAuth} />
       <Route 
         path="/setari/date-personale" 
@@ -64,6 +39,7 @@ const Routes = (props) => (
         onEnter={requireAuth}
       />
       <Route path="/flux" component={Feed} onEnter={requireAuth}/>
+      <Route path="access_token=:token" component={Home} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
