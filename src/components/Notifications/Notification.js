@@ -17,7 +17,9 @@ type NotificationData = {
 }
 
 export default class Notification extends Component {
-  props: NotificationData
+  props: {
+    notif: NotificationData
+  }
 
   render() {
     const ts_to_date = new Date(this.props.notif.timestamp * 1000);
