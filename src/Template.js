@@ -85,10 +85,10 @@ class Template extends Component {
         </Navbar>
         <Grid>
           <Row>
-            <Col xs={4} md={2} className="sidebar">
+            <Col xs={3} md={3} className="sidebar">
               Sidebar
             </Col>
-            <Col xs={10} md={5}>{children}</Col>
+            <Col xs={9} md={9}>{children}</Col>
           </Row>
         </Grid>
       </div>
