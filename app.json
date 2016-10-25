@@ -2,7 +2,7 @@
   "name": "asistentul_cetateanului",
   "description": "Asistent utilitar care livreaza alerte si notificari pentru cetateni, in functie de preferinte",
   "scripts": {
-    "postdeploy": "npm install; npm start;"
+    "postdeploy": "npm install;"
   },
   "env": {
   },
