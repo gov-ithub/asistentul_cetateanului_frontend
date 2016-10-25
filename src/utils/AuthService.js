@@ -7,7 +7,11 @@ export default class AuthService extends EventEmitter {
   constructor(clientId, domain) {
     super();
 
-    this.lock = new Auth0Lock(clientId, domain, {})
+    this.lock = new Auth0Lock(clientId, domain, {
+      auth: {
+        redirect: false 
+      }
+    })
 
     this.lock.on('authenticated', this._doAuthentication.bind(this))
     this.lock.on('authorization_error', this._authorizationError.bind(this));
