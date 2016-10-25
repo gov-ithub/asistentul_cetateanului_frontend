@@ -2,6 +2,9 @@
   "root": "build/",
   "clean_urls": false,
   "https_only": true,
+  "routes": {
+    "/**": "index.html"
+  },
   "headers": {
     "/**": {
       "Strict-Transport-Security": "max-age=7776000"
