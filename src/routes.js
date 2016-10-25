@@ -39,7 +39,7 @@ const Routes = (props) => (
         onEnter={requireAuth}
       />
       <Route path="/flux" component={Feed} onEnter={requireAuth}/>
-      <Route path="access_token=:token" component={Home} />
+      <Route path="?access_token=:token" component={Home} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
