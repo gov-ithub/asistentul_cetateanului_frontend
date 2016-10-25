@@ -9,7 +9,7 @@
     },
     "REACT_APP_AUTH0_DOMAIN": {
       "required": true
-    },
+    }
   },
   "formation": {
   },
