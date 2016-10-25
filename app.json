@@ -2,7 +2,6 @@
   "name": "asistentul_cetateanului",
   "description": "Asistent utilitar care livreaza alerte si notificari pentru cetateni, in functie de preferinte",
   "scripts": {
-    "postdeploy": "npm install;"
   },
   "env": {
   },
@@ -13,7 +12,7 @@
   ],
   "buildpacks": [
     {
-      "url": "heroku/nodejs"
+      "url": "mars/create-react-app-buildpack"
     }
   ]
 }
