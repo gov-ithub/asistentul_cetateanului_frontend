@@ -1,4 +1,5 @@
-import React, { PropTypes as T, Component } from 'react';
+// @flow
+import React, { PropTypes as T, Component, Element } from 'react';
 import { 
   Navbar, 
   Nav, 
@@ -7,23 +8,36 @@ import {
   Row, 
   Col,
   NavDropdown,
-  MenuItem
+  MenuItem,
+  Glyphicon
 } from 'react-bootstrap';
 
 import AuthService from './utils/AuthService';
+import type { UserProfile } from './utils/AuthService';
+import classnames from 'classnames';
 
 import './template.css';
 
+type Props = {
+  auth: AuthService,
+  children: Element<any>,
+  className?: string
+}
+
+type State = {
+  profile: UserProfile
+}
+
 class Template extends Component {
+  // TODO: Need interface declaration for react-router
   static contextTypes = {
     router: T.object
-  }
+  };
 
-  static propTypes = {
-    auth: T.instanceOf(AuthService)
-  }
+  props: Props;
+  state: State;
 
-  constructor(props, context) {
+  constructor(props: Props, context: any) {
     super(props, context);
     this.state = {
       profile: this.props.auth.getProfile()
@@ -33,12 +47,12 @@ class Template extends Component {
     });
   }
 
-  logout() {
+  logout(): void {
     this.props.auth.logout();
     this.context.router.push('/home');
   }
 
-  render() {
+  render(): Element<any> {
     const { profile } = this.state;
 
     let children = null;
@@ -51,12 +65,18 @@ class Template extends Component {
     let profile_details = null;
     let login_button = null;
     let logout_button = null;
+    let flux_button = null;
 
     if (this.props.auth.isLoggedIn()) {
+      const name = profile.name || '';
+
       logout_button = 
         <NavItem eventKey={2} onClick={this.logout.bind(this)}>Logout</NavItem>;
       profile_details = 
-        <NavDropdown eventKey={3} title={profile.name} id={profile.name}>
+        <NavDropdown 
+          eventKey={3} 
+          title={"Bun venit, " + name}
+          id="personalizare">
           <MenuItem eventKey={3.1} href="/setari/date-personale">
             Setări Personale
           </MenuItem>
@@ -64,6 +84,8 @@ class Template extends Component {
             Setări Notificări
           </MenuItem>
         </NavDropdown>;
+      flux_button = 
+        <NavItem eventKey={1} href="/flux">Flux</NavItem>
     } else {
       login_button = (
         <NavItem eventKey={11} href="#" onClick={this.props.auth.login.bind(this)}>
@@ -72,35 +94,46 @@ class Template extends Component {
       );
     }
     
+    const { className } = this.props;
 
     return (
-      <div>
-        <Navbar inverse>
+      <div className={classnames('app-header', className)}>
+        <Navbar fixedTop={true} >
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/home">Asistentul Cetățeanului</a>
+              <a href="/home">
+                <Glyphicon glyph="send" className="app-header-logo" />
+                Asistentul Cetățeanului
+              </a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              {login_button}
               {profile_details}
             </Nav>
             <Nav pullRight> 
-              <NavItem eventKey={1} href="/flux">Flux</NavItem>
+              {login_button}
+              {flux_button}
               {logout_button}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Grid>
+        <Grid className="app-container">
           <Row>
-            <Col xs={3} md={3} className="sidebar">
-              Sidebar
-            </Col>
-            <Col xs={9} md={9}>{children}</Col>
+            <Col xs={12} md={12}>{children}</Col>
           </Row>
         </Grid>
+        <Navbar fixedBottom={true} >
+          <Navbar.Collapse>
+            <Navbar.Text>
+              Made by <a href="http://ithub.gov.ro/">GovITHub</a>
+            </Navbar.Text>
+            <Nav pullRight>
+                    
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
     );
   }
