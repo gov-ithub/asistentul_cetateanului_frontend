@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import EditNotificationSettings from './EditNotificationSettings';
 
 export default class NotificationSettings extends Component {
   render() {
-    return <h1>NotificationSettings</h1>;
+    return (
+      <div>
+        <EditNotificationSettings />
+      </div>
+    );
   }
 }
