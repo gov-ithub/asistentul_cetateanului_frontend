@@ -1,20 +1,35 @@
 // @flow
 import React, { Component } from 'react';
 import { 
-  Alert
+  Alert,
+  Label
 } from 'react-bootstrap';
+
+import './notifications.css';
 
 type NotificationSource = {
   id: number,
   name: string
 }
 
+type NotificationSeverity = 
+  | "success"
+  | "warning"
+  | "danger";
+
 type NotificationData = {
   title: string,
   timestamp: number,
   description: string,
-  source: NotificationSource
+  source: NotificationSource,
+  severity: NotificationSeverity
 }
+
+const TranslatedSeverity = {
+  "success": "Trivial",
+  "warning": "Important",
+  "danger": "Urgent"
+};
 
 export default class Notification extends Component {
   props: {
@@ -22,17 +37,24 @@ export default class Notification extends Component {
   }
 
   render() {
-    const ts_to_date = new Date(this.props.notif.timestamp * 1000);
+    const { notif } = this.props;
+
+    const ts_to_date = new Date(notif.timestamp * 1000);
     const human_date = 
       ts_to_date.getDate() + '/' +
       ts_to_date.getMonth() + '/' + 
       ts_to_date.getFullYear();
 
     return (
-      <Alert> 
-        <strong>{this.props.notif.title}</strong>
-        <p>{this.props.notif.description}</p>
-        <p>{this.props.notif.source.name} &bull; {human_date}</p>
+      <Alert bsStyle="warning" className="notification">  
+        <strong>{notif.title}</strong>
+        <p>{notif.description}</p>
+        <p>
+          {notif.source.name} &bull; {human_date} 
+          <Label bsStyle={notif.severity} >
+            {TranslatedSeverity[notif.severity]}            
+          </Label>
+        </p>
       </Alert>
     );
   }
