@@ -68,12 +68,14 @@ class Template extends Component {
     let flux_button = null;
 
     if (this.props.auth.isLoggedIn()) {
+      const name = profile.name || '';
+
       logout_button = 
         <NavItem eventKey={2} onClick={this.logout.bind(this)}>Logout</NavItem>;
       profile_details = 
         <NavDropdown 
           eventKey={3} 
-          title={"Bun venit, " + profile.name}
+          title={"Bun venit, " + name}
           id="personalizare">
           <MenuItem eventKey={3.1} href="/setari/date-personale">
             Setări Personale
