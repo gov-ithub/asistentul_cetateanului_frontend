@@ -1,16 +1,44 @@
+// @flow
 import Auth0Lock from 'auth0-lock';
 import { isTokenExpired } from './jwtHelper';
-import { EventEmitter } from 'events';
+import EventEmitter from 'events';
 import { browserHistory } from 'react-router';
 
+export type UserID = string | number;
+
+export type UserProfileMetadata = {
+  telefon?: string
+};
+
+export type UserProfile = {
+  name?: string,
+  email?: string,
+  nickname?: string,
+  user_metadata?: UserProfileMetadata,
+  created_at?: string,
+  updated_at?: string
+};
+
 export default class AuthService extends EventEmitter {
-  constructor(clientId, domain) {
+  domain: string;
+  login: () => void;
+  lock: Auth0Lock;
+
+  constructor(clientId: string, domain: string) {
     super();
+    this.domain = domain;
 
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
         redirect: false 
-      }
+      },
+      additionalSignUpFields: [{
+        name: "Telefon",
+        placeholder: "Număr telefon",
+        validator: function(value) {
+          return value.length > 12 && value.length < 15;
+        }
+      }]
     })
 
     this.lock.on('authenticated', this._doAuthentication.bind(this))
@@ -19,7 +47,7 @@ export default class AuthService extends EventEmitter {
     this.login = this.login.bind(this)
   }
 
-  _doAuthentication(authResult){
+  _doAuthentication(authResult: any): void{
     this.setToken(authResult.idToken);
     browserHistory.replace('/flux');
 
@@ -32,38 +60,59 @@ export default class AuthService extends EventEmitter {
     });
   }
 
-  _authorizationError(error) {
+  _authorizationError(error: string): void {
     console.log('Authentication error', error);
   }
 
-  login() {
+  updateProfile(userId: UserID, data: any): Promise<void> {
+    const token = this.getToken() || '';
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+
+    return fetch(`https://${this.domain}/api/v2/users/${userId}`, {
+      method: 'PATCH',
+      headers: headers,
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(newProfile => this.setProfile(newProfile));
+  }
+
+  login(): void {
     this.lock.show()
   }
 
-  setProfile(profile) {
+  setProfile(profile: UserProfile): void {
     localStorage.setItem('profile', JSON.stringify(profile));
     this.emit('profile_updated', profile);
   }
 
-  getProfile() {
+  getProfile(): UserProfile {
     const profile = localStorage.getItem('profile');
-    return profile ? JSON.parse(localStorage.profile) : {};
+    const profile_obj = profile 
+      ? JSON.parse(profile) 
+      : {};
+
+    return (profile_obj: UserProfile);
   }
 
-  isLoggedIn(){
+  isLoggedIn(): boolean {
     const token = this.getToken();
     return !!token && !isTokenExpired(token);
   }
 
-  setToken(idToken){
+  setToken(idToken: string): void {
     localStorage.setItem('id_token', idToken)
   }
 
-  getToken(){
+  getToken(): ?string {
     return localStorage.getItem('id_token')
   }
 
-  logout(){
+  logout(): void {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
   }
