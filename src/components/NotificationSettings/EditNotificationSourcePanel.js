@@ -29,7 +29,7 @@ type Props = {
 export default class EditNotificationSourcePanel extends Component {
   props: Props;
 
-  unsubscribe(e) {
+  unsubscribe(e: Event): void {
     e.preventDefault();
   }
 

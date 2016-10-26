@@ -23,7 +23,7 @@ type Props = {
 export default class NotificationProviderPanel extends Component {
   props: Props;
 
-  subscribe(e) {
+  subscribe(e: Event): void {
     e.preventDefault();
   }
 
