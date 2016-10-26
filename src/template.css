@@ -1,3 +1,7 @@
-.sidebar {
-  border-right: 1px solid #ccc;
+.app-container {
+  padding-top: 65px;
+}
+
+.app-header-logo {
+  margin-right: 10px;
 }
