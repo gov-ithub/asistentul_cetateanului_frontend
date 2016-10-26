@@ -9,7 +9,7 @@ import {
   Col,
   NavDropdown,
   MenuItem,
-  Glyphicon
+  Glyphicon,
 } from 'react-bootstrap';
 
 import AuthService from './utils/AuthService';
@@ -130,7 +130,6 @@ class Template extends Component {
               Made by <a href="http://ithub.gov.ro/">GovITHub</a>
             </Navbar.Text>
             <Nav pullRight>
-                    
             </Nav>
           </Navbar.Collapse>
         </Navbar>
