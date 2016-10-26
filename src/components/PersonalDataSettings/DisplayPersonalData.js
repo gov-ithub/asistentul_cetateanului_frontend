@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Image,
-  Alert
+  Alert,
+  ListGroup,
+  ListGroupItem
 } from 'react-bootstrap';
 
 import type { 
@@ -34,17 +35,27 @@ export default class DisplayPersonalData extends Component {
 
     return (
       <Row>
-        <Col md={2} mdOffset={4}>
-          <Image src={profile.picture} circle />
-        </Col>
-        <Col>
-          <h3>Date personale</h3>
-          <p><strong>Nume: </strong> {profile.name}</p>
-          <p><strong>Email: </strong> {profile.email}</p>
-          <p><strong>Username: </strong> {profile.nickname}</p>
-          <p><strong>Telefon: </strong> {telefon}</p>
-          <p><strong>Creat pe data de: </strong> {profile.created_at}</p>
-          <p><strong>Actualizat pe data de: </strong> {profile.updated_at}</p>
+        <Col md={12}>
+          <ListGroup fill>
+            <ListGroupItem>
+              <strong>Nume: </strong> {profile.name}
+            </ListGroupItem>
+            <ListGroupItem>
+              <strong>Email: </strong> {profile.email}
+            </ListGroupItem>
+            <ListGroupItem>
+              <strong>Username: </strong> {profile.nickname}
+            </ListGroupItem>
+            <ListGroupItem>
+              <strong>Telefon: </strong> {telefon}
+            </ListGroupItem>
+            <ListGroupItem>
+              <strong>Creat pe data de: </strong> {profile.created_at}
+            </ListGroupItem>
+            <ListGroupItem>
+              <strong>Actualizat pe data de: </strong> {profile.updated_at}
+            </ListGroupItem>
+          </ListGroup>
         </Col>
       </Row>
     );

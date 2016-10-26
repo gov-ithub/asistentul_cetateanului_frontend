@@ -12,6 +12,8 @@ import type {
   UserProfile
 } from '../../utils/AuthService';
 
+import './personaldata.css';
+
 type EditPersonalDataAction =
   | "DISPLAY"
   | "EDIT";
@@ -69,7 +71,11 @@ export default class PersonalDataSettings extends Component {
 
     return (
       <div>
-        <Nav bsStyle="tabs" activeKey="1" onSelect={this.handleSelect.bind(this)}>
+        <Nav 
+          bsStyle="pills" 
+          activeKey="1" 
+          onSelect={this.handleSelect.bind(this)}
+          className="personal-data-header">
           <NavItem eventKey="DISPLAY" active={this.state.action === "DISPLAY"}>
             Afișează date personale
           </NavItem>

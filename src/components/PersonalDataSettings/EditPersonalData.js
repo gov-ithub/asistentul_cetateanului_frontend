@@ -67,15 +67,14 @@ export default class EditPersonalData extends Component {
 
     return (
       <Row>
-        <Col md={4} mdOffset={6}>
-          <h3>Editează-ți datele personale</h3>
+        <Col md={12}>
           {confirmation_box}
           <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
             <FormGroup controlId="telefon">
               <Col componentClass={ControlLabel} sm={2}>
                 Telefon
               </Col>
-              <Col sm={10}>
+              <Col sm={4}>
                 <FormControl type="text" defaultValue={telefon} ref="Telefon" />
               </Col>
             </FormGroup>
