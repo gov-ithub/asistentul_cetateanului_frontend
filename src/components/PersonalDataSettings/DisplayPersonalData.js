@@ -1,18 +1,36 @@
+// @flow
 import React, { PropTypes as T, Component } from 'react';
 import {
   Row,
   Col,
   Image,
+  Alert
 } from 'react-bootstrap';
 
+import type { 
+  UserProfile
+} from '../../utils/AuthService';
+
 export default class DisplayPersonalData extends Component {
-  static propTypes = {
-    profile: T.object,
+  props: {
+    profile: UserProfile
   }
 
   render() {
-    const { profile } = this.props;
-    const { telefon } = profile.user_metadata || {};
+    const { profile } = this.props || {};
+    if (!profile) {
+      return (
+        <div>
+          <Alert bsStyle="warning">
+            Date indisponibile. Vă rugăm încercați mai târziu.
+          </Alert>  
+        </div>
+      );
+    }
+
+    const { telefon } = profile 
+      ? profile.user_metadata || {}
+      : {};
 
     return (
       <Row>

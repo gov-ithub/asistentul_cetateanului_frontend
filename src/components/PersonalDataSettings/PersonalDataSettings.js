@@ -30,9 +30,7 @@ export default class PersonalDataSettings extends Component {
     action: EditPersonalDataAction
   };
 
-  static propTypes = {
-    auth: T.instanceOf(AuthService)
-  }
+  props: Props;
 
   handleSelect(eventKey: EditPersonalDataAction): void {
     event.preventDefault();
@@ -45,7 +43,7 @@ export default class PersonalDataSettings extends Component {
     super(props, context);
 
     this.state = {
-      profile: props.auth.getProfile(),
+      profile: this.props.auth.getProfile(),
       action: "DISPLAY" 
     }
 

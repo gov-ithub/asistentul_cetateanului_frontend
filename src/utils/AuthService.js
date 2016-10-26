@@ -16,7 +16,8 @@ export type UserProfile = {
   nickname?: string,
   user_metadata?: UserProfileMetadata,
   created_at?: string,
-  updated_at?: string
+  updated_at?: string,
+  picture?: string
 };
 
 export default class AuthService extends EventEmitter {
