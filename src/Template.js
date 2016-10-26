@@ -5,8 +5,11 @@ import {
   NavItem, 
   Grid, 
   Row, 
-  Col
+  Col,
+  NavDropdown,
+  MenuItem
 } from 'react-bootstrap';
+
 import AuthService from './utils/AuthService';
 
 import './template.css';
@@ -53,7 +56,14 @@ class Template extends Component {
       logout_button = 
         <NavItem eventKey={2} onClick={this.logout.bind(this)}>Logout</NavItem>;
       profile_details = 
-        <Navbar.Text>Bun venit {profile.name}</Navbar.Text>;
+        <NavDropdown eventKey={3} title={profile.name} id={profile.name}>
+          <MenuItem eventKey={3.1} href="/setari/date-personale">
+            Setări Personale
+          </MenuItem>
+          <MenuItem eventKey={3.2} href="/setari/notificari">
+            Setări Notificări
+          </MenuItem>
+        </NavDropdown>;
     } else {
       login_button = (
         <NavItem eventKey={11} href="#" onClick={this.props.auth.login.bind(this)}>
@@ -75,8 +85,8 @@ class Template extends Component {
           <Navbar.Collapse>
             <Nav>
               {login_button}
+              {profile_details}
             </Nav>
-            {profile_details}
             <Nav pullRight> 
               <NavItem eventKey={1} href="/flux">Flux</NavItem>
               {logout_button}

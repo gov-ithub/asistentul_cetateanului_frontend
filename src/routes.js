@@ -26,8 +26,12 @@ const Routes = (props) => (
   <Router {...props}>
     <Route path="/" component={Container} auth={auth}>
       <IndexRedirect to="/home" />
-      <Route path="/home" component={Home} />
-      <Route path="/setari" component={Settings} onEnter={requireAuth} />
+      <Route path="/home" component={Home} name="Home" />
+      <Route 
+        path="/setari" 
+        component={Settings} 
+        onEnter={requireAuth} 
+      />
       <Route 
         path="/setari/date-personale" 
         component={PersonalDataSettings} 
@@ -38,7 +42,11 @@ const Routes = (props) => (
         component={NotificationSettings} 
         onEnter={requireAuth}
       />
-      <Route path="/flux" component={Feed} onEnter={requireAuth}/>
+      <Route 
+        path="/flux" 
+        component={Feed} 
+        onEnter={requireAuth}
+      />
       <Route path="access_token=:token" component={Home} />
       <Route path="*" component={NotFound} />
     </Route>
