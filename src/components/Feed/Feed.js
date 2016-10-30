@@ -45,4 +45,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 }
 
-export default connect(mapStateToProps)(Feed)
+export { Feed };
+
+export default connect(mapStateToProps)(Feed);
