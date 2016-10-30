@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRedirect } from 'react-router';
+import { Route, IndexRedirect } from 'react-router';
 
 import Container from './Container';
 import Settings from './components/Settings/Settings';
@@ -22,35 +22,29 @@ const requireAuth = (nextState, replace) => {
   }
 }
 
-const Routes = (props) => (
-  <Router {...props}>
-    <Route path="/" component={Container} auth={auth}>
-      <IndexRedirect to="/home" />
-      <Route path="/home" component={Home} name="Home" />
-      <Route 
-        path="/setari" 
-        component={Settings} 
-        onEnter={requireAuth} 
-      />
-      <Route 
-        path="/setari/date-personale" 
-        component={PersonalDataSettings} 
-        onEnter={requireAuth} 
-      />
-      <Route 
-        path="/setari/notificari" 
-        component={NotificationSettings} 
-        onEnter={requireAuth}
-      />
-      <Route 
-        path="/flux" 
-        component={Feed} 
-        onEnter={requireAuth}
-      />
-      <Route path="access_token=:token" component={Home} />
-      <Route path="*" component={NotFound} />
-    </Route>
-  </Router>
-);
-
-export default Routes;
+export default <Route path="/" component={Container} auth={auth}>
+  <IndexRedirect to="/home" />
+  <Route path="/home" component={Home} name="Home" />
+  <Route 
+    path="/setari" 
+    component={Settings} 
+    onEnter={requireAuth} 
+  />
+  <Route 
+    path="/setari/date-personale" 
+    component={PersonalDataSettings} 
+    onEnter={requireAuth} 
+  />
+  <Route 
+    path="/setari/notificari" 
+    component={NotificationSettings} 
+    onEnter={requireAuth}
+  />
+  <Route 
+    path="/flux" 
+    component={Feed} 
+    onEnter={requireAuth}
+  />
+  <Route path="access_token=:token" component={Home} />
+  <Route path="*" component={NotFound} />
+</Route>

@@ -1,48 +1,28 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux'
 
 import Notification from '../Notifications/Notification';
 import FeedFilter from './FeedFilter';
+import { fetchNotifications } from '../../actions'
 
-const Notifications = [
-  {
-    title: "Programare RAR",
-    timestamp: 1477272824,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    source: {
-      id: 1,
-      name: "GovITHub/Stop Cozi"
-    },
-    severity: "success"
-  },
-  {
-    title: "Alertă Cod Roșu",
-    timestamp: 1477272824,
-    description: "Nunc finibus, dolor malesuada sodales finibus, nisi diam iaculis ante, sed rutrum quam sapien laoreet sapien.",
-    source: {
-      id: 2,
-      name: "Administratia Nationala de Meteorologie"
-    },
-    severity: "danger"
-  },
-  {
-    title: "Training gratuit / Obținere fonduri Europene",
-    timestamp: 1477272824,
-    description: "Proin vel dignissim est, ac venenatis orci. Vestibulum id viverra nisl. Praesent vehicula dignissim lorem, sit amet mollis orci blandit ac. Vestibulum et gravida risus.",
-    source: {
-      id: 3,
-      name: "Ministerul Agriculturii și Dezvoltării Rurale"
-    },
-    severity: "success"
-  },
-];
+class Feed extends Component {
 
-export default class Feed extends Component {
+  static propTypes = {
+    isFetching: PropTypes.bool.isRequired,
+    notifications: PropTypes.array.isRequired,
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchNotifications());
+  }
+  
   render() {
     let notifications_container = [];
-    for (let i = 0, len = Notifications.length; i < len; i++) {
+    for (let i = 0, len = this.props.notifications.length; i < len; i++) {
       notifications_container.push(
-        <Notification notif={Notifications[i]} key={i}/>
+        <Notification notif={this.props.notifications[i]} key={i}/>
       );
     }
 
@@ -54,3 +34,15 @@ export default class Feed extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+
+  const { isFetching, notifications } = state.notifications;
+
+  return {
+    isFetching,
+    notifications,
+  };
+}
+
+export default connect(mapStateToProps)(Feed)
