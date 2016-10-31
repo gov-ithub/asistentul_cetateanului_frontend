@@ -22,9 +22,11 @@ class Feed extends Component {
   
   render() {
     let notifications_container = [];
-    for (let i = 0, len = this.props.notifications.length; i < len; i++) {
+    const { notifications } = this.props;
+
+    for (let i = 0, len = notifications.length; i < len; i++) {
       notifications_container.push(
-        <Notification notif={this.props.notifications[i]} key={i}/>
+        <Notification notif={notifications[i]} key={i}/>
       );
     }
 
