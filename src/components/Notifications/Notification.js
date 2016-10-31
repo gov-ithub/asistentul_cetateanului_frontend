@@ -5,25 +5,8 @@ import {
   Label
 } from 'react-bootstrap';
 
+import { notification as notificationType } from '../../types';
 import './notifications.css';
-
-type NotificationSource = {
-  id: number,
-  name: string
-}
-
-type NotificationSeverity = 
-  | "success"
-  | "warning"
-  | "danger";
-
-type NotificationData = {
-  title: string,
-  timestamp: number,
-  description: string,
-  source: NotificationSource,
-  severity: NotificationSeverity
-}
 
 const TranslatedSeverity = {
   "success": "Trivial",
@@ -33,7 +16,7 @@ const TranslatedSeverity = {
 
 export default class Notification extends Component {
   props: {
-    notif: NotificationData
+    notif: notificationType
   }
 
   render() {
