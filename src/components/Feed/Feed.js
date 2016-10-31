@@ -1,17 +1,19 @@
 // @flow
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import Notification from '../Notifications/Notification';
 import FeedFilter from './FeedFilter';
-import { fetchNotifications } from '../../actions'
+import { fetchNotifications } from '../../actions';
+
+type props = {
+  isFetchingNotifications: boolean,
+  notifications: Array<NotificationData>,
+};
 
 class Feed extends Component {
 
-  static propTypes = {
-    isFetching: PropTypes.bool.isRequired,
-    notifications: PropTypes.array.isRequired,
-  }
+  props: props;
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -40,7 +42,7 @@ const mapStateToProps = (state, ownProps) => {
   const { isFetching, notifications } = state.notifications;
 
   return {
-    isFetching,
+    isFetchingNotifications: isFetching,
     notifications,
   };
 }
